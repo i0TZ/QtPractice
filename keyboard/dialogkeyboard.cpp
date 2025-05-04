@@ -8,6 +8,7 @@ DialogKeyboard::DialogKeyboard(QWidget *parent)
     , ui(new Ui::DialogKeyboard)
 {
     ui->setupUi(this);
+    this->setWindowTitle("Keyboard");
     QTimer *cursorTimer = new QTimer(this);
     connect(cursorTimer, &QTimer::timeout, this, &DialogKeyboard::onCursorFlash);
     cursorTimer->start(500);

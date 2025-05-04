@@ -7,6 +7,8 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
+    this->setWindowTitle("Demo");
+
     QWidget *widget = new QWidget(this);
     widget->setLayout(new QVBoxLayout());
 
