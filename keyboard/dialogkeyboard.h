@@ -24,7 +24,7 @@ public:
 private:
     Ui::DialogKeyboard *ui;
 
-    void onBtnClicked(QPushButton *btn);
+    void onBtnClicked();
     void onCursorFlash();
     void onUpperCase(bool upper);
 

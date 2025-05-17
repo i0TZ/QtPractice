@@ -13,14 +13,11 @@ DialogKeyboard::DialogKeyboard(QWidget *parent)
     connect(cursorTimer, &QTimer::timeout, this, &DialogKeyboard::onCursorFlash);
     cursorTimer->start(500);
 
-    for (QPushButton *btn : ui->keyboardLower->findChildren<QPushButton *>()) {
-        connect(btn, &QPushButton::clicked, this, [=](){ onBtnClicked(btn); });
-    }
-    for (QPushButton *btn : ui->keyboardUpper->findChildren<QPushButton *>()) {
-        connect(btn, &QPushButton::clicked, this, [=](){ onBtnClicked(btn); });
-    }
-    for (QPushButton *btn : ui->keyboardNum->findChildren<QPushButton *>()) {
-        connect(btn, &QPushButton::clicked, this, [=](){ onBtnClicked(btn); });
+    QFont font;
+    font.setPixelSize(20);
+    for (QPushButton *btn : this->findChildren<QPushButton *>()) {
+        btn->setFont(font);
+        connect(btn, &QPushButton::clicked, this, &DialogKeyboard::onBtnClicked);
     }
     setTypeNum(false);
 }
@@ -35,7 +32,7 @@ void DialogKeyboard::setTypeNum(bool isNum)
     ui->btnNum_lock->setChecked(isNum);
     ui->keyboardNum->setVisible(isNum);
     ui->stackedWidget->setVisible(!isNum);
-    this->resize(isNum ? QSize(270, 250) : QSize(700, 250));
+    this->resize(isNum ? QSize(400, 375) : QSize(1050, 375));
 }
 
 void DialogKeyboard::setTextValue(const QString &text)
@@ -78,8 +75,9 @@ float DialogKeyboard::getNumber(const QString &text, bool *ok)
     return 0;
 }
 
-void DialogKeyboard::onBtnClicked(QPushButton *btn)
+void DialogKeyboard::onBtnClicked()
 {
+    QPushButton *btn = static_cast<QPushButton *>(sender());
     QString str = ui->label->text();
     QString tip = btn->toolTip();
     if (tip.isEmpty()) {
@@ -99,6 +97,8 @@ void DialogKeyboard::onBtnClicked(QPushButton *btn)
         ui->label->setText(QString());
     } else if (tip == "Num") {
         setTypeNum(ui->stackedWidget->isVisible());
+    } else if (tip == "Esc") {
+        this->reject();
     }
 }
 
@@ -106,7 +106,7 @@ void DialogKeyboard::onCursorFlash()
 {
     static bool black = false;
     QPalette palette = ui->label_Cursor->palette();
-    palette.setColor(QPalette::WindowText, black ? Qt::gray : Qt::white);
+    palette.setColor(QPalette::WindowText, black ? Qt::darkGray : Qt::white);
     ui->label_Cursor->setPalette(palette);
     black = !black;
 }

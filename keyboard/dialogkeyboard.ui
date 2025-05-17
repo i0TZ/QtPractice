@@ -2934,22 +2934,5 @@ color: rgb(22, 22, 22);</string>
   </layout>
  </widget>
  <resources/>
- <connections>
-  <connection>
-   <sender>btn_Esc</sender>
-   <signal>clicked()</signal>
-   <receiver>DialogKeyboard</receiver>
-   <slot>reject()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>647</x>
-     <y>20</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>698</x>
-     <y>15</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>
